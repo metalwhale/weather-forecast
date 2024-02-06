@@ -1,0 +1,10 @@
+version: "3"
+services:
+  main:
+    build:
+      context: ./
+      dockerfile: Dockerfile.local
+    volumes:
+      - ./:/usr/src/weather-forecast/
+    tty: true
+    working_dir: /usr/src/weather-forecast/
