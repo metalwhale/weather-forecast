@@ -2,3 +2,6 @@
 
 # Cargo
 /target
+
+# services
+/database/data

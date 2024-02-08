@@ -10,12 +10,19 @@ Start the containers:
 ```bash
 docker compose up -d --build --remove-orphans
 ```
-Get inside the main container:
+Get inside the app container:
 ```bash
-docker compose exec main bash
+docker compose exec app bash
 ```
 
-### Run the job
+### Job
+Run migrations:
+```bash
+cd ./weather-forecast-job/
+DATABASE_URL=postgres://${DATABASE_USER}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_DB} diesel migration run
+cd ../
+```
+Run the job:
 ```bash
 cargo run -p weather-forecast-job
 ```
