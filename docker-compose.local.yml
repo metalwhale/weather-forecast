@@ -8,6 +8,7 @@ services:
       - POSTGRES_DB=${DATABASE_DB:-app}
       - POSTGRES_USER=${DATABASE_USER:-app}
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - TZ=Asia/Tokyo
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready" ]
       interval: 10s
@@ -28,6 +29,7 @@ services:
       - DATABASE_DB=${DATABASE_DB:-app}
       - DATABASE_USER=${DATABASE_USER:-app}
       - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - TZ=Asia/Tokyo
     volumes:
       - ./:/usr/src/weather-forecast/
     tty: true

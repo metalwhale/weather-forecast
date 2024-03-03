@@ -8,7 +8,7 @@ cp .env.local .env
 ```
 Start the containers:
 ```bash
-docker compose up -d --build --remove-orphans
+docker compose up --build --remove-orphans -d
 ```
 Get inside the app container:
 ```bash
@@ -24,5 +24,5 @@ cd ../
 ```
 Run the job:
 ```bash
-cargo run -p weather-forecast-job
+cargo run -p weather-forecast-job collect-daily-records
 ```

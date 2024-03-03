@@ -1,0 +1,21 @@
+# Build
+FROM rust:1.75.0-bookworm AS build
+
+COPY .. /usr/src/weather-forecast/
+
+WORKDIR /usr/src/weather-forecast/
+
+RUN cargo install diesel_cli --no-default-features --features postgres
+RUN cargo build --release -p weather-forecast-job
+
+# Deployment
+FROM debian:trixie-slim
+
+RUN apt update -y && \
+    apt install -y libpq5 ca-certificates
+
+COPY --from=build /usr/local/cargo/bin/diesel /bin/diesel
+COPY --from=build /usr/src/weather-forecast/target/release/weather-forecast-job /bin/weather-forecast-job
+COPY ./migrations /usr/src/weather-forecast/weather-forecast-job/migrations
+
+WORKDIR /usr/src/weather-forecast/weather-forecast-job/
